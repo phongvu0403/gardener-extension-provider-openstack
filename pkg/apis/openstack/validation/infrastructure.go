@@ -76,6 +76,12 @@ func ValidateInfrastructureConfig(infra *api.InfrastructureConfig, nodesCIDR *st
 		allErrs = append(allErrs, field.Invalid(fldPath.Child("floatingPoolSubnetName"), infra.FloatingPoolSubnetName, "router id must be empty when a floating subnet name is provided"))
 	}
 
+	if infra.Networks.SubnetID != "" {
+		if _, err := uuid.Parse(infra.Networks.SubnetID); err != nil {
+			allErrs = append(allErrs, field.Invalid(networksPath.Child("subnetId"), infra.Networks.SubnetID, "if subnet ID is provided it must be a valid OpenStack UUID"))
+		}
+	}
+
 	return allErrs
 }
 

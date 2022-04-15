@@ -47,6 +47,9 @@ type Networks struct {
 	// ID is the ID of an existing private network.
 	// +optional
 	ID *string `json:"id,omitempty"`
+	// SubnetID is ID of an existing subnet
+	// +optional
+	SubnetID string `json:"subnetId,omitempty"`
 }
 
 // Router indicates whether to use an existing router or create a new one.
