@@ -15,11 +15,11 @@
 EXTENSION_PREFIX            := gardener-extension
 NAME                        := provider-openstack
 ADMISSION_NAME              := admission-openstack
-REGISTRY                    := eu.gcr.io/gardener-project/gardener
-IMAGE_PREFIX                := $(REGISTRY)/extensions
+REGISTRY                    := docker.io
+IMAGE_PREFIX                := $(REGISTRY)/phongvu0403
 REPO_ROOT                   := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 HACK_DIR                    := $(REPO_ROOT)/hack
-VERSION                     := $(shell cat "$(REPO_ROOT)/VERSION")
+VERSION                     := 0.1
 LD_FLAGS                    := "-w -X github.com/gardener/$(EXTENSION_PREFIX)-$(NAME)/pkg/version.Version=$(IMAGE_TAG)"
 LEADER_ELECTION             := false
 IGNORE_OPERATION_ANNOTATION := true

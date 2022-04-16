@@ -52,28 +52,11 @@ data "openstack_networking_network_v2" "cluster" {
 }
 {{- end }}
 
-{{ if .create.subnet -}}
-resource "openstack_networking_subnet_v2" "cluster" {
-  name            = "{{ .clusterName }}"
-  cidr            = "{{ .networks.workers }}"
-  network_id      = {{ template "network-id" $ }}
-  ip_version      = 4
-  {{- if .dnsServers }}
-  dns_nameservers = [{{- dnsServers .dnsServers }}]
-  {{- else }}
-  dns_nameservers = []
-  {{- end }}
-}
-resource "openstack_networking_router_interface_v2" "router_nodes" {
-  router_id = {{ .router.id }}
-  subnet_id = openstack_networking_subnet_v2.cluster.id
-}
-{{ else -}}
 data "openstack_networking_subnet_v2" "cluster" {
-  network_id = "{{ .networks.id }}"
-  subnet_id = "{{ .subnet.subnetId }}"
+  network_id      = {{ template "network-id" $ }}
+  cidr            = "{{ .networks.workers }}"
+  ip_version      = 4
 }
-{{- end }}
 
 resource "openstack_networking_secgroup_v2" "cluster" {
   name                 = "{{ .clusterName }}"
@@ -158,7 +141,7 @@ output "{{ .outputKeys.floatingNetworkID }}" {
 }
 
 output "{{ .outputKeys.subnetID }}" {
-  value = {{ .subnet.subnetId }}
+  value = data.openstack_networking_subnet_v2.cluster.id
 }
 
 

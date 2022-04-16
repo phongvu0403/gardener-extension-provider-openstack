@@ -43,8 +43,6 @@ type Networks struct {
 	Workers string
 	// ID is the ID of an existing private network.
 	ID *string
-	// SubnetID is ID of an existing subnet
-	SubnetID string
 }
 
 // Router indicates whether to use an existing router or create a new one.
