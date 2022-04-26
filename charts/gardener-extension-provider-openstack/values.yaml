@@ -1,6 +1,6 @@
 image:
-  repository: eu.gcr.io/gardener-project/gardener/extensions/provider-openstack
-  tag: latest
+  repository: phongvu0403/provider-openstack
+  tag: v0.1.0
   pullPolicy: IfNotPresent
 
 replicaCount: 1
